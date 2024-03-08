@@ -442,3 +442,39 @@ sys_pipe(void)
   fd[1] = fd1;
   return 0;
 }
+
+
+// implementing wmap syscall
+int
+sys_wmap(void)
+{
+  uint addr;
+  int len;
+  int flags;
+  int fd;
+
+  if(argint(0, (int*)&addr) < 0)
+    return -1;
+  if(argint(1, (int*)&len) < 0)
+    return -1;
+  if(argint(2, (int*)&flags) < 0)
+    return -1;
+  if(argint(3, (int*)&fd) < 0)
+    return -1;
+
+  uint ret = wmap(addr, len, flags, fd);
+  return ret;
+}
+
+// implementing wunmap syscall
+int
+sys_wunmap(void)
+{
+  uint addr;
+
+  if(argint(0, (int*)&addr) < 0)
+    return -1;
+
+  int ret = wunmap(addr);
+  return ret;
+}

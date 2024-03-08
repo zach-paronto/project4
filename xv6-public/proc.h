@@ -32,6 +32,15 @@ struct context {
   uint eip;
 };
 
+typedef struct node
+{
+    uint addr;
+    int length;
+    int flags;
+    int fd;
+    struct node *next;
+} node;
+
 enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 
 // Per-process state
@@ -40,6 +49,7 @@ struct proc {
   pde_t* pgdir;                // Page table
   char *kstack;                // Bottom of kernel stack for this process
   enum procstate state;        // Process state
+  struct node *head;           // Linked list storing the virtual mem-mappings of the process
   int pid;                     // Process ID
   struct proc *parent;         // Parent process
   struct trapframe *tf;        // Trap frame for current syscall
