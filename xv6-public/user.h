@@ -1,7 +1,7 @@
-#include "wmap.h"
-
 struct stat;
 struct rtcdate;
+struct pgdirinfo;
+struct wmapinfo;
 
 // system calls
 int fork(void);
