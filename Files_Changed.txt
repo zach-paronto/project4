@@ -1,0 +1,13 @@
+Files Modified:
+    -llnode.c: implementing linked list nodes
+    -llnode.h: header file for llnode.c
+    -wmap.c: created user level program to invoke system call -- not complete
+    -Makefile: added wmap, wunmap to UPROGS
+    -sysfile.c: sys call for wmap, wunmap created
+    -defs.h: added wmap, wunmap
+    -syscall.c: added defs for wmap, wunmap
+    -syscall.h: associations for SYS_wmap, SYS_wunmap
+    -wmap.h: init w given headers
+    -wunmap.c: created user level program to invoke system call -- not complete
+    -user.h: declarations for wmap, wunmap
+    -proc.h: added node struct, modified proc struct to store linked list of mapped memory

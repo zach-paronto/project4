@@ -27,6 +27,7 @@ OBJS = \
 	uart.o\
 	vectors.o\
 	vm.o\
+	llnode.o\
 	wmap.o\
 	wunmap.o\
 

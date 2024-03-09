@@ -102,6 +102,7 @@ extern int sys_sleep(void);
 extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_wmap(void);
+extern int sys_wunmap(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 
@@ -128,6 +129,7 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_wmap]    sys_wmap,
+[SYS_wunmap]  sys_wunmap,
 };
 
 void
