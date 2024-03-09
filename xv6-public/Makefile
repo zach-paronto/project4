@@ -4,6 +4,8 @@ OBJS = \
 	exec.o\
 	file.o\
 	fs.o\
+	getpgdirinfo.o\
+	getwmapinfo.o\
 	ide.o\
 	ioapic.o\
 	kalloc.o\

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "stdlib.h": "c",
-        "memlayout.h": "c"
+        "memlayout.h": "c",
+        "x86.h": "c"
     }
 }

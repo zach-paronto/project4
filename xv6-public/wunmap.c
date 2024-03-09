@@ -11,7 +11,7 @@
 int wunmap(uint addr)
 {
     struct proc *curproc = myproc();
-    if (addr < 0 || addr > KERNBASE)
+    if (addr < 0 || addr > KERNBASE || ((addr & (PGSIZE - 1)) != 0))
     {
         return FAILED;
     }

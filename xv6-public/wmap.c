@@ -34,7 +34,7 @@ List of other Testing Scripts:
 // returns the address at which the file was mapped
 uint wmap(uint addr, int length, int flags, int fd)
 {
-    if (addr > KERNBASE || addr < 0x60000000)
+    if (addr > KERNBASE || addr < 0x60000000 || ((addr & (PGSIZE - 1)) != 0))
     {
         return FAILED;
     }
@@ -49,6 +49,10 @@ uint wmap(uint addr, int length, int flags, int fd)
 
     struct proc *process = myproc();
     int lenCopy = length;
+    if (lenCopy % PGSIZE != 0)
+    {
+        lenCopy += (PGSIZE - (lenCopy % PGSIZE));
+    }
     uint addrCopy = addr;
     char *mem;
 
@@ -56,19 +60,20 @@ uint wmap(uint addr, int length, int flags, int fd)
     // if that range is not available, return FAILED
     if ((flags & MAP_FIXED) == MAP_FIXED)
     {
-        if (is_conflict(process, addr, length))
+        if (is_conflict(process, addr, lenCopy))
         {
             return FAILED;
         }
     }
     else
     {
-        node *free = find_free(process, length);
+        node *free = find_free(process, lenCopy);
         if (free == 0)
         {
             return FAILED;
         }
         addrCopy = free->addr;
+        addr = addrCopy;
         kfree((char *)free);
     }
 

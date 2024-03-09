@@ -90,6 +90,8 @@ extern int sys_exit(void);
 extern int sys_fork(void);
 extern int sys_fstat(void);
 extern int sys_getpid(void);
+extern int sys_getpgdirinfo(void);
+extern int sys_getwmapinfo(void);
 extern int sys_kill(void);
 extern int sys_link(void);
 extern int sys_mkdir(void);
@@ -130,6 +132,8 @@ static int (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 [SYS_wmap]    sys_wmap,
 [SYS_wunmap]  sys_wunmap,
+[SYS_getpgdirinfo] sys_getpgdirinfo,
+[SYS_getwmapinfo] sys_getwmapinfo,
 };
 
 void

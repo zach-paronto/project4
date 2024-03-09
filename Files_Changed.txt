@@ -2,12 +2,24 @@ Files Modified:
     -llnode.c: implementing linked list nodes
     -llnode.h: header file for llnode.c
     -wmap.c: created user level program to invoke system call -- not complete
-    -Makefile: added wmap, wunmap to UPROGS
-    -sysfile.c: sys call for wmap, wunmap created
-    -defs.h: added wmap, wunmap
-    -syscall.c: added defs for wmap, wunmap
-    -syscall.h: associations for SYS_wmap, SYS_wunmap
+    -Makefile: added wmap, wunmap, getpgdirinfo, getwmapinfo to OBJS
+    -sysfile.c: sys call for wmap, wunmap, getpgdirinfo, getwmapinfo created
+    -defs.h: added wmap, wunmap, getpgdirinfo, getwmapinfo
+            also added structs for 2 get info functions
+    -syscall.c: added defs for wmap, wunmap, getpgdirinfo, getwmapinfo
+    -syscall.h: associations for SYS_wmap, SYS_wunmap, SYS_getpgdirinfo, SYS_getwmapinfo
     -wmap.h: init w given headers
     -wunmap.c: created user level program to invoke system call -- not complete
-    -user.h: declarations for wmap, wunmap
+    -user.h: declarations for wmap, wunmap, getpgdirinfo, getwmapinfo
     -proc.h: added node struct, modified proc struct to store linked list of mapped memory
+    -getwmapinfo.c: should be fully implemented. not tested yet.
+    -getpgdirinfo.c: should be fully implemented. not tested yet.
+
+
+NOTES:
+    - I am unclear on this in the instructions, but it may be that all of our lengths are multiples of page size.
+    If so, our implementation is much easier. If not, we may not be able to just round up the requested length 
+    and store that in the node instead of whatever was requested. This will require only a few tweaks throughout the
+    files to fix.
+    To be clear, the code right now will store a node for a request of 0 to PAGE_SIZE bytes as PAGE_SIZE in length.
+    This may or may not be allowed under the instructions.

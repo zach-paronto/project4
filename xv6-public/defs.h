@@ -3,12 +3,14 @@ struct context;
 struct file;
 struct inode;
 struct pipe;
+struct pgdirinfo;
 struct proc;
 struct rtcdate;
 struct spinlock;
 struct sleeplock;
 struct stat;
 struct superblock;
+struct wmapinfo;
 
 // bio.c
 void            binit(void);
@@ -193,6 +195,12 @@ uint           wmap(uint addr, int length, int flags, int fd);
 
 // wunmap.c
 int            wunmap(uint addr);
+
+// getwmapinfo.c
+int             getwmapinfo(struct wmapinfo *wmpinfo);
+
+// getpgdirinfo.c
+int             getpgdirinfo(struct pgdirinfo *pgdirinfo);
 
 
 // number of elements in fixed-size array
