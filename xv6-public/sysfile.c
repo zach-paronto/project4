@@ -15,7 +15,6 @@
 #include "sleeplock.h"
 #include "file.h"
 #include "fcntl.h"
-#include "wmap.h"
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
@@ -442,66 +441,4 @@ sys_pipe(void)
   fd[0] = fd0;
   fd[1] = fd1;
   return 0;
-}
-
-
-// implementing wmap syscall
-int
-sys_wmap(void)
-{
-  uint addr;
-  int len;
-  int flags;
-  int fd;
-
-  if(argint(0, (int*)&addr) < 0)
-    return -1;
-  if(argint(1, (int*)&len) < 0)
-    return -1;
-  if(argint(2, (int*)&flags) < 0)
-    return -1;
-  if(argint(3, (int*)&fd) < 0)
-    return -1;
-
-  uint ret = wmap(addr, len, flags, fd);
-  return ret;
-}
-
-// implementing wunmap syscall
-int
-sys_wunmap(void)
-{
-  uint addr;
-
-  if(argint(0, (int*)&addr) < 0)
-    return -1;
-
-  int ret = wunmap(addr);
-  return ret;
-}
-
-// implementing getwmapinfo syscall
-int
-sys_getwmapinfo(void)
-{
-  struct wmapinfo *wmapinfo;
-
-  if(argptr(0, (void*)&wmapinfo, sizeof(*wmapinfo)) < 0)
-    return -1;
-
-  int ret = getwmapinfo(wmapinfo);
-  return ret;
-}
-
-// implementing getpgdirinfo syscall
-int
-sys_getpgdirinfo(void)
-{
-  struct pgdirinfo *pgdirinfo;
-
-  if(argptr(0, (void*)&pgdirinfo, sizeof(*pgdirinfo)) < 0)
-    return -1;
-
-  int ret = getpgdirinfo(pgdirinfo);
-  return ret;
 }

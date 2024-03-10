@@ -4,8 +4,6 @@ OBJS = \
 	exec.o\
 	file.o\
 	fs.o\
-	getpgdirinfo.o\
-	getwmapinfo.o\
 	ide.o\
 	ioapic.o\
 	kalloc.o\
@@ -29,9 +27,7 @@ OBJS = \
 	uart.o\
 	vectors.o\
 	vm.o\
-	llnode.o\
 	wmap.o\
-	wunmap.o\
 
 # Cross-compiling (e.g., on Mac OS X)
 # TOOLPREFIX = i386-jos-elf

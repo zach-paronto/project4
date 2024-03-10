@@ -191,16 +191,11 @@ int             mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm);
 pde_t*          walkpgdir(pde_t *pgdir, const void *va, int alloc);
 
 // wmap.c
-uint           wmap(uint addr, int length, int flags, int fd);
-
-// wunmap.c
-int            wunmap(uint addr);
-
-// getwmapinfo.c
-int             getwmapinfo(struct wmapinfo *wmpinfo);
-
-// getpgdirinfo.c
-int             getpgdirinfo(struct pgdirinfo *pgdirinfo);
+uint            wmap(uint, int, int, int);
+uint            wremap(uint, int, int, int);
+int             wunmap(uint);
+int             getpgdirinfo(struct pgdirinfo*);
+int             getwmapinfo(struct wmapinfo*);
 
 
 // number of elements in fixed-size array

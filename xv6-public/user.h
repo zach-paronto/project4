@@ -1,3 +1,4 @@
+#include "types.h"
 struct stat;
 struct rtcdate;
 struct pgdirinfo;
@@ -25,10 +26,11 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
-uint wmap(uint addr, int length, int flags, int fd); // might not be necessary
-int wunmap(uint addr); // might not be necessary
-int getpgdirinfo(struct pgdirinfo *pdinfo);
-int getwmapinfo(struct wmapinfo *wminfo);
+uint wmap(uint, int, int, int);
+uint wremap(uint, int, int, int);
+int wunmap(uint);
+int getpgdirinfo(struct pgdirinfo*);
+int getwmapinfo(struct wmapinfo*);
 
 // ulib.c
 int stat(const char*, struct stat*);

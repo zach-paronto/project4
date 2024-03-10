@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Attach to Kernel",
+        "type": "gdb",
+        "request": "attach",
+        "executable": "./kernel",
+        "target": "localhost:1234",
+        "cwd": "${workspaceRoot}/src",
+        "valuesFormatting": "parseText",
+        "remote": true
+      }
+    ]
+  }

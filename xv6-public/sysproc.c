@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "wmap.h"
 
 int
 sys_fork(void)
@@ -88,4 +89,56 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+int
+sys_wmap(void)
+{
+  uint addr;
+  int length, flags, fd;
+  if (argint(0, (int *)&addr) < 0 || argint(1, &length) < 0 || argint(2,  &flags) < 0 || argint(3, &fd) < 0 || argint(3, &fd) >= NOFILE) {
+    return FAILED;
+  }
+  return wmap(addr, length, flags, fd);
+}
+
+int
+sys_wunmap(void)
+{
+  uint addr;
+  if (argint(0, (int *)&addr) < 0) {
+    return FAILED;
+  }
+  return wunmap(addr);
+}
+
+int
+sys_wremap(void)
+{
+  uint oldaddr;
+  int oldsize, newsize, flags;
+  if (argint(0, (int *)&oldaddr) < 0 || argint(1, &oldsize) < 0 || argint(2, &newsize) < 0 || argint(3, &flags) < 0) {
+    return FAILED;
+  }
+  return wremap(oldaddr, oldsize, newsize, flags);
+}
+
+int 
+sys_getwmapinfo(void)
+{
+  struct wmapinfo* wminfo;
+  if (argptr(0, (void *)&wminfo, sizeof(wminfo)) < 0) {
+    return FAILED;
+  }
+  return getwmapinfo(wminfo);
+}
+
+int
+sys_getpgdirinfo(void)
+{
+  struct pgdirinfo* pdinfo;
+  if (argptr(0, (void *)&pdinfo, sizeof(pdinfo)) < 0) {
+    return FAILED;
+  }
+  return getpgdirinfo(pdinfo);
 }
